@@ -481,6 +481,38 @@ CI/CD 最佳实践：具体建议
 
 <details>
 <summary>你将如何为依赖于其他多个应用程序的应用程序构建/实现CD?</summary><br><b>
+为一个依赖多个其他应用程序的应用程序构建持续部署（CD）流程，需要解决以下挑战：
+
+    依赖服务是否已准备就绪？
+
+    版本兼容性如何管理？
+
+    部署顺序/并发策略？
+
+    回滚策略如何设计？
+一、典型场景示例
+
+例如：你有一个前端应用 frontend-app，它依赖：
+
+    🧩 后端服务 A：api-service
+
+    🧩 鉴权服务 B：auth-service
+
+    🧩 配置中心 C：config-service
+
+这些服务可能是分开的 Git 仓库、独立开发团队、不同部署频率。
+✅ 二、核心目标：构建一个“感知依赖状态、具备协调能力”的 CD 流程
+✅ 三、推荐做法：实现依赖感知 + 自动协调部署流程
+1. 组件化设计与版本依赖声明
+
+每个服务都定义自己的版本、接口稳定性与依赖：
+# config-service/manifest.yaml
+version: v2.1.0
+exposes:
+  - endpoint: /config
+compatible_with:
+  - api-service >= v1.2.0
+
 </b></details>
 
 <details>
