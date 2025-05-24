@@ -1730,7 +1730,28 @@ Terraform与其他工具相比的优势：
 <details>
 <summary><code>terraform.tfstate</code> 文件用来做什么?</summary><br><b> 
 
-它跟踪创建的资源的ID，以便Terraform知道它正在管理什么。
+terraform.tfstate 是 Terraform 的核心状态文件，它记录了 Terraform 管理的实际基础设施的当前状态和元数据。
+本质与作用
+
+    基础设施的真实记录：
+
+        存储 Terraform 管理的所有资源的当前状态
+
+        记录资源属性、依赖关系和元数据
+
+        映射 Terraform 配置代码与实际云资源的关系
+
+    变更管理的基础：
+
+        Terraform 通过比较配置代码与 state 文件来决定需要执行哪些变更
+
+        执行 terraform plan 时会对比配置与 state 的差异
+
+    依赖关系跟踪：
+
+        维护资源间的依赖关系图
+
+        确保资源按正确顺序创建/更新/销毁
 </b></details>
 
 <details>
